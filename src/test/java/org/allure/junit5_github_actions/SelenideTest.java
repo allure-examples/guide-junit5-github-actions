@@ -1,15 +1,16 @@
 package org.allure.junit5_github_actions;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Allure;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import com.codeborne.selenide.logevents.SelenideLogger;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.selenide.AllureSelenide;
 
 public class SelenideTest {
 
@@ -24,6 +25,11 @@ public class SelenideTest {
         String selenideUrl = System.getenv("SELENIDE_URL");
         if (selenideUrl != null && !selenideUrl.isEmpty()) {
             Configuration.remote = selenideUrl;
+        }
+
+        String selenideHeadless = System.getenv("SELENIDE_HEADLESS");
+        if (selenideHeadless != null && selenideHeadless.equals("true")) {
+            Configuration.headless = true;
         }
     }
 
